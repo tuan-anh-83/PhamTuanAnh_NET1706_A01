@@ -34,11 +34,22 @@ namespace PhamTuanAnhWPF
                 SystemAccount account = accountService.GetAccount(txtEmail.Text.Trim());
                 if (account != null && password.Trim().Equals(account.AccountPassword))
                 {
-                    AdminMenu adminMenu = new AdminMenu();
-                    adminMenu.Show();
-                    this.Hide();
-
-                    
+                    switch (account.AccountRole)
+                    {
+                        case 1:
+                            AdminMenu adminMenu = new AdminMenu();
+                            adminMenu.Show();
+                            this.Hide();
+                            break;
+                        case 2:
+                            StaffMenu list = new StaffMenu(account.AccountEmail);
+                            list.Show();
+                            this.Hide();
+                            break;
+                        default:
+                            MessageBox.Show("You are not Permission !");
+                            break;
+                    }
                 }
                 else
                 {
@@ -55,7 +66,7 @@ namespace PhamTuanAnhWPF
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn thoát không?", "Xác nhận thoát", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show("Are you sure?", "Xác nhận thoát", MessageBoxButton.OKCancel, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.OK)
             {

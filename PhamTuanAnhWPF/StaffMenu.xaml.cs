@@ -15,26 +15,21 @@ using System.Windows.Shapes;
 namespace PhamTuanAnhWPF
 {
     /// <summary>
-    /// Interaction logic for AdminMenu.xaml
+    /// Interaction logic for StaffMenu.xaml
     /// </summary>
-    public partial class AdminMenu : Window
+    public partial class StaffMenu : Window
     {
-        public AdminMenu()
+        private string staffEmail;
+        public StaffMenu(string email)
         {
             InitializeComponent();
+            staffEmail = email;
         }
 
         private void btnManageAccount_Click(object sender, RoutedEventArgs e)
         {
-            ManageAccount manageAccount = new ManageAccount();
+            ManageStaffInformation manageAccount = new ManageStaffInformation(staffEmail);
             manageAccount.Show();
-            this.Hide();
-        }
-
-        private void btnCreateReport_Click(object sender, RoutedEventArgs e)
-        {
-            CreateReport news = new CreateReport();
-            news.Show();
             this.Hide();
         }
     }

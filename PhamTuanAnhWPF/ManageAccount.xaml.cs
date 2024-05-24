@@ -58,7 +58,6 @@ namespace PhamTuanAnhWPF
             {
                 isValidData = false;
                 txtAccountID.Focus();
-                txtAccountID.Background = Brushes.Red; ;
                 MessageBox.Show("AccountID can not Empty !");
             }
 
@@ -161,7 +160,10 @@ namespace PhamTuanAnhWPF
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
+            string search = txtSearch.Text.Trim();
+            List<SystemAccount> account = accountService.SearchAccount(search);
 
+            dgAccountList.ItemsSource = account;
         }
     }
 }
