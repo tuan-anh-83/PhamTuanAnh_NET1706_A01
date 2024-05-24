@@ -100,18 +100,46 @@ namespace NewsDAO
 
         }
 
+        public SystemAccount GetAccountById(short accountId)
+        {
+            try
+            {
+                var dbContent = new FUNewsManagementDBContext();
+                return dbContent.SystemAccounts.SingleOrDefault(m => m.AccountId == accountId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void UpdateAccount(SystemAccount account)
         {
-            var dbContent = new FUNewsManagementDBContext();
+            try
+            {
+                using (var dbContent = new FUNewsManagementDBContext())
+                {
+                    var existingAccount = dbContent.SystemAccounts.SingleOrDefault(a => a.AccountId == account.AccountId);
 
-            if (account != null)
-            {
-                dbContent.SystemAccounts.Update(account);
-                dbContent.SaveChanges();
+                    if (existingAccount != null)
+                    {
+                        existingAccount.AccountName = account.AccountName;
+                        existingAccount.AccountEmail = account.AccountEmail;
+                        existingAccount.AccountRole = account.AccountRole;
+                        existingAccount.AccountPassword = account.AccountPassword;
+
+                        dbContent.SystemAccounts.Update(existingAccount);
+                        dbContent.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("Account ID hasn't existed!");
+                    }
+                }
             }
-            else
+            catch (Exception ex)
             {
-                throw new Exception("Email hasn't existed !");
+                throw new Exception(ex.Message);
             }
         }
 

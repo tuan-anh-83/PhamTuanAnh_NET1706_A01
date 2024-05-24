@@ -9,9 +9,8 @@ namespace NewsService
 {
     public interface IStaffAccountService
     {
-        void AddAccount(SystemAccount account);
         SystemAccount GetAccount(string email);
-        void DeleteAccount(string email);
         void UpdateAccount(SystemAccount account);
+        SystemAccount GetAccountById(short account);
     }
 }

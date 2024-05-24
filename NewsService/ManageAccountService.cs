@@ -42,6 +42,11 @@ namespace NewsService
             return accountRepository.SearchAccount(account);
         }
 
+        public SystemAccount GetAccountById(short account)
+        {
+            return accountRepository.GetAccountById(account);
+        }
+
         public void UpdateAccount(SystemAccount account)
         {
             accountRepository.UpdateAccount(account);

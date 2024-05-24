@@ -18,6 +18,8 @@ namespace NewsRepository
 
         void UpdateAccount(SystemAccount account);
 
+        SystemAccount GetAccountById(short account);
+
         List<SystemAccount> SearchAccount(string account);
     }
 }

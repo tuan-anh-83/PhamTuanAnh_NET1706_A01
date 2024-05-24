@@ -27,7 +27,7 @@ namespace NewsDAO
             }
         }
 
-        // Chỉ lấy tài khoản của chính nhân viên dựa trên email
+        
         public SystemAccount GetAccount(string email)
         {
             try
@@ -41,39 +41,13 @@ namespace NewsDAO
             }
         }
 
-        public void AddAccount(SystemAccount account)
-        {
-            try
-            {
-                var dbContent = new FUNewsManagementDBContext();
-                SystemAccount accountProfile = GetAccount(account.AccountEmail.ToString());
-                if (accountProfile == null)
-                {
-                    dbContent.SystemAccounts.Add(account);
-                    dbContent.SaveChanges();
-                }
-                else
-                {
-                    throw new Exception("AccountID has existed !");
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
 
-        public void DeleteAccount(string email)
+        public SystemAccount GetAccountById(short accountId)
         {
             try
             {
                 var dbContent = new FUNewsManagementDBContext();
-                SystemAccount accountProfile = GetAccount(email);
-                if (accountProfile != null)
-                {
-                    dbContent.SystemAccounts.Remove(accountProfile);
-                    dbContent.SaveChanges();
-                }
+                return dbContent.SystemAccounts.SingleOrDefault(m => m.AccountId == accountId);
             }
             catch (Exception ex)
             {
@@ -83,15 +57,31 @@ namespace NewsDAO
 
         public void UpdateAccount(SystemAccount account)
         {
-            var dbContent = new FUNewsManagementDBContext();
-            if (account != null)
+            try
             {
-                dbContent.SystemAccounts.Update(account);
-                dbContent.SaveChanges();
+                using (var dbContent = new FUNewsManagementDBContext())
+                {
+                    var existingAccount = dbContent.SystemAccounts.SingleOrDefault(a => a.AccountId == account.AccountId);
+
+                    if (existingAccount != null)
+                    {
+                        existingAccount.AccountName = account.AccountName;
+                        existingAccount.AccountEmail = account.AccountEmail;
+                        existingAccount.AccountRole = account.AccountRole;
+                        existingAccount.AccountPassword = account.AccountPassword;
+
+                        dbContent.SystemAccounts.Update(existingAccount);
+                        dbContent.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("Account ID hasn't existed!");
+                    }
+                }
             }
-            else
+            catch (Exception ex)
             {
-                throw new Exception("Email hasn't existed !");
+                throw new Exception(ex.Message);
             }
         }
     }

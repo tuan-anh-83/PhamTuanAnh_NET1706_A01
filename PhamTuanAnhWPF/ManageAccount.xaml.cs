@@ -91,11 +91,11 @@ namespace PhamTuanAnhWPF
             {
                 if (accountService != null)
                 {
-                    SystemAccount account = accountService.GetAccount(txtAccountEmail.Text.Trim());
+                    short accountId = short.Parse(txtAccountID.Text.Trim());
+                    SystemAccount account = accountService.GetAccountById(accountId);
 
                     if (account != null)
                     {
-                        account.AccountId = short.Parse(txtAccountID.Text.Trim());
                         account.AccountName = txtAccountName.Text.Trim();
                         account.AccountEmail = txtAccountEmail.Text.Trim();
                         account.AccountRole = int.Parse(txtAccountRole.Text.Trim());
@@ -107,11 +107,9 @@ namespace PhamTuanAnhWPF
                     }
                     else
                     {
-                        MessageBox.Show("Email isn't existed!");
+                        MessageBox.Show("Account ID isn't existed!");
                     }
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -131,7 +129,7 @@ namespace PhamTuanAnhWPF
                 }
                 else
                 {
-                    MessageBox.Show("MemberID isn't empty");
+                    MessageBox.Show("AccountsID isn't empty");
                 }
 
             }
@@ -143,7 +141,7 @@ namespace PhamTuanAnhWPF
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn thoát không?", "Xác nhận thoát", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show("Are you sure?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.OK)
             {

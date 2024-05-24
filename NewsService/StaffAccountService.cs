@@ -17,16 +17,6 @@ namespace NewsService
             accountRepository = new StaffAccountRepository();
         }
 
-        public void AddAccount(SystemAccount account)
-        {
-            accountRepository.AddAccount(account);
-        }
-
-        public void DeleteAccount(string email)
-        {
-            accountRepository.DeleteAccount(email);
-        }
-
         public SystemAccount GetAccount(string email)
         {
             return accountRepository.GetAccount(email);
@@ -35,6 +25,11 @@ namespace NewsService
         public void UpdateAccount(SystemAccount account)
         {
             accountRepository.UpdateAccount(account);
+        }
+
+        public SystemAccount GetAccountById(short account)
+        {
+            return accountRepository.GetAccountById(account);
         }
     }
 }

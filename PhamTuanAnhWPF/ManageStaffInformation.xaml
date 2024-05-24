@@ -34,8 +34,7 @@
         </GroupBox>
         <GroupBox HorizontalAlignment="Left" Height="356" Header="" Margin="609,10,0,0" VerticalAlignment="Top" Width="171">
             <Canvas Margin="0,0,0,-13">
-                <Button x:Name="btnUpdate" Content="Update" Height="49" Width="115" HorizontalAlignment="Left" Canvas.Left="22" VerticalAlignment="Top" Canvas.Top="65" Click="btnUpdate_Click"/>
-                <Button x:Name="btnDelete" Content="Delete" Height="51" Width="115" HorizontalAlignment="Left" Canvas.Left="22" VerticalAlignment="Top" Canvas.Top="157" Click="btnDelete_Click"/>
+                <Button x:Name="btnUpdate" Content="Update" Height="49" Width="115" HorizontalAlignment="Center" Canvas.Left="22" VerticalAlignment="Top" Canvas.Top="87" Click="btnUpdate_Click"/>
                 <Button x:Name="btnClose" Content="Close" Height="36" Width="105" HorizontalAlignment="Left" Canvas.Left="32" VerticalAlignment="Center" Canvas.Top="291" Click="btnClose_Click"/>
                 <Button x:Name="btnBack" Content="Back " Height="30" Width="88" Canvas.Left="-145" Canvas.Top="299" Click="btnBack_Click" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 

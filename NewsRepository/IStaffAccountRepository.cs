@@ -9,9 +9,8 @@ namespace NewsRepository
 {
     public interface IStaffAccountRepository
     {
-        void AddAccount(SystemAccount account);
         SystemAccount GetAccount(string email);
-        void DeleteAccount(string email);
         void UpdateAccount(SystemAccount account);
+        SystemAccount GetAccountById(short account);
     }
 }

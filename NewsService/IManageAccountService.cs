@@ -16,6 +16,7 @@ namespace NewsService
 
         void DeleteAccount(string account);
 
+        SystemAccount GetAccountById(short account);
         void UpdateAccount(SystemAccount account);
 
         List<SystemAccount> SearchAccount(string account);

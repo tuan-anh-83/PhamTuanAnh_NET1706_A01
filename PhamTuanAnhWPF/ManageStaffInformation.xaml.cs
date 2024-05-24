@@ -52,22 +52,25 @@ namespace PhamTuanAnhWPF
         {
             try
             {
-                SystemAccount account = accountService.GetAccount(staffEmail);
-
-                if (account != null)
+                if (accountService != null)
                 {
-                    account.AccountId = short.Parse(txtAccountID.Text.Trim());
-                    account.AccountName = txtAccountName.Text.Trim();
-                    account.AccountEmail = txtAccountEmail.Text.Trim();
-                    account.AccountRole = int.Parse(txtAccountRole.Text.Trim());
-                    account.AccountPassword = txtPassword.Text.Trim();
+                    short accountId = short.Parse(txtAccountID.Text.Trim());
+                    SystemAccount account = accountService.GetAccountById(accountId);
 
-                    accountService.UpdateAccount(account);
-                    MessageBox.Show("Update Account Successful!!");
-                }
-                else
-                {
-                    MessageBox.Show("Email isn't existed!");
+                    if (account != null)
+                    {
+                        account.AccountName = txtAccountName.Text.Trim();
+                        account.AccountEmail = txtAccountEmail.Text.Trim();
+                        account.AccountRole = int.Parse(txtAccountRole.Text.Trim());
+                        account.AccountPassword = txtPassword.Text.Trim();
+
+                        accountService.UpdateAccount(account);
+                        MessageBox.Show("Update Account Successful!!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Account ID isn't existed!");
+                    }
                 }
             }
             catch (Exception ex)
@@ -80,11 +83,11 @@ namespace PhamTuanAnhWPF
         {
             try
             {
-                if (MessageBox.Show("Are you sure you want to delete your account?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (MessageBox.Show("Are you sure?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     accountService.DeleteAccount(staffEmail);
                     MessageBox.Show("Delete Account Successful!!");
-                    this.Close(); // Close the window after account is deleted
+                    this.Close();
                 }
             }
             catch (Exception ex)
@@ -95,7 +98,7 @@ namespace PhamTuanAnhWPF
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn thoát không?", "Xác nhận thoát", MessageBoxButton.OKCancel, MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show("Are you sure?", "Confirmation", MessageBoxButton.OKCancel, MessageBoxImage.Question);
 
             if (result == MessageBoxResult.OK)
             {
@@ -105,8 +108,8 @@ namespace PhamTuanAnhWPF
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            AdminMenu adminMenu = new AdminMenu();
-            adminMenu.Show();
+            StaffMenu staffMenu = new StaffMenu(staffEmail);
+            staffMenu.Show();
             this.Hide();
         }
     }

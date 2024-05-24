@@ -19,6 +19,8 @@ namespace NewsRepository
 
         public List<SystemAccount> SearchAccount(string account) => ManageAccountDAO.Instance.SearchAccount(account);
 
+        public SystemAccount GetAccountById(short account) => ManageAccountDAO.Instance.GetAccountById(account);
+
         public void UpdateAccount(SystemAccount account) => ManageAccountDAO.Instance.UpdateAccount(account);
 
     }
