@@ -37,11 +37,10 @@ namespace PhamTuanAnhWPF
             var dataGrid = sender as DataGrid;
             if (dataGrid == null) return;
 
-            // Lấy ra hàng được click
             var row = ItemsControl.ContainerFromElement((DataGrid)sender, e.OriginalSource as DependencyObject) as DataGridRow;
             if (row == null) return;
 
-            // Lấy dữ liệu từ hàng được click và hiển thị lên các điều khiển TextBox và DatePicker
+            
             var selectedBook = (SystemAccount)row.Item;
             txtAccountID.Text = selectedBook.AccountId.ToString();
             txtAccountID.IsEnabled = false;

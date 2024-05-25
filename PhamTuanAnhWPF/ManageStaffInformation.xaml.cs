@@ -79,22 +79,6 @@ namespace PhamTuanAnhWPF
             }
         }
 
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (MessageBox.Show("Are you sure?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                {
-                    accountService.DeleteAccount(staffEmail);
-                    MessageBox.Show("Delete Account Successful!!");
-                    this.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Something is wrong !! Please check again" + ex.Message);
-            }
-        }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
